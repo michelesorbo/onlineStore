@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpKernel\HttpCache\Store;
 
 class AdminController extends Controller
 {
@@ -36,6 +38,16 @@ class AdminController extends Controller
         $newProduct->setPrice($request->input('price'));
         $newProduct->setImage('game.png');
         $newProduct->save();
+
+        if($request->hasFile('image')){
+            $imageName = $newProduct->getId().".".$request->file('image')->extension(); //Rinomino l'immagine con l'id del prodotto e l'estensione del file
+            Storage::disk('public')->put(
+                $imageName,
+                file_get_contents($request->file('image')->getRealPath())
+            );
+            $newProduct->setImage($imageName);
+            $newProduct->save();
+        }
 
         return back();
     }

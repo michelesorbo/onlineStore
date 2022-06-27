@@ -19,9 +19,11 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 
 
 //Creo le rout per l'area Admin
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.home.index'); //Index Admin
-Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products.index'); //Products Admin
-Route::post('/admin/products/store', [AdminController::class, 'store'])->name('admin.product.store'); //Inserire nuovo prodotto in DB
+Route::middleware('admin')->group(function(){
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.home.index'); //Index Admin
+    Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products.index'); //Products Admin
+    Route::post('/admin/products/store', [AdminController::class, 'store'])->name('admin.product.store'); //Inserire nuovo prodotto in DB
+});
 
 Route::get('/corso', function(){
     return 'Ciao dal corso di Laravel';

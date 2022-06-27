@@ -20,6 +20,7 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 
 //Creo le rout per l'area Admin
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.home.index');
+Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products.index');
 
 Route::get('/corso', function(){
     return 'Ciao dal corso di Laravel';

@@ -23,6 +23,7 @@ Route::middleware('admin')->group(function(){
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.home.index'); //Index Admin
     Route::get('/admin/products', [AdminController::class, 'products'])->name('admin.products.index'); //Products Admin
     Route::post('/admin/products/store', [AdminController::class, 'store'])->name('admin.product.store'); //Inserire nuovo prodotto in DB
+    Route::delete('/admin/products/{id}/delete', [AdminController::class, 'delete'])->name('admin.product.delete');
 });
 
 Route::get('/corso', function(){

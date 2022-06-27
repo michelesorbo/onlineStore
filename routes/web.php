@@ -28,3 +28,7 @@ Route::get('/corso', function(){
 });
 
 Route::get('/utenti/michele', [HomeController::class, 'michele'])->name('michele');
+
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

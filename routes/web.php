@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -18,6 +19,10 @@ Route::get('/product', [ProductController::class, 'index'])->name('product.index
 //creo la rout per il dettaglio prodotto passando il parametro ID
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 
+//Creo le Rout per il carrello
+Route::get('/cart', [CartController::class, 'index'])->name("cart.index");
+Route::get('/cart/delete', [CartController::class, 'delete'])->name("cart.delete");
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name("cart.add");
 
 //Creo le rout per l'area Admin
 Route::middleware('admin')->group(function(){

@@ -43,9 +43,9 @@ class Product extends Model
 
     public function getPrice(){
         if($this->attributes['price']>= 1000){
-            return "€ ".$this->attributes['price'];
+            return $this->attributes['price'];
         }else{
-            return "€ ".$this->attributes['price']." + Spese di spedizione";
+            return $this->attributes['price'];
         }
     }
 
@@ -67,5 +67,14 @@ class Product extends Model
 
     public function setUpdatedAt($updatedAt){
         $this->attributes['updated_at'] = $updatedAt;
+    }
+
+    public static function validate($request){
+        $request->validate([
+            "name" => "required|max:255",
+            "description" => "required",
+            "price" => "required|numeric|gt:0",
+            "image" => "image",
+        ]);
     }
 }
